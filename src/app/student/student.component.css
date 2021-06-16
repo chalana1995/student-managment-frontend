@@ -1,0 +1,30 @@
+.k-grid-header .mygrid-header-cell {
+    text-align: center;
+    display: table-cell; vertical-align: top;
+  }
+  .k-grid-header .wrap-header {
+    height: auto;
+    overflow: visible;
+    white-space: normal;
+  }
+
+  .fa-file-excel {
+    font-size:24px;
+    margin-right: 10px;
+  }
+
+  .fa-user-edit {
+    font-size:16px;
+    color:blue
+  }
+
+  .fa-trash{
+    font-size:16px;
+    color:red
+  }
+
+  .uploaderror {
+    color: red;
+     font-size: .8em;
+     margin-top: .5em;
+  }

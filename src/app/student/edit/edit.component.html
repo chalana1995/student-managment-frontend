@@ -1,0 +1,40 @@
+<div class="container mt-5">
+    <h2>{{header}}</h2>
+    <div class="row">
+        <div class="imagecontainer">
+            <img src="assets/student.png" height="150" width="150" class="image" >
+        </div>
+    </div>
+    <form class="k-form" [formGroup]="form">
+        <div class="row">
+            <div class="col-md-12">
+                <kendo-formfield [showErrors]="'initial'" class="col-md-12">
+                    <kendo-label [for]="name" text="Name"></kendo-label>
+                    <input kendoTextBox #name [formControlName]="'name'" />
+                    <kendo-formerror>Error: Name is required</kendo-formerror>
+                </kendo-formfield>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <kendo-formfield [showErrors]="'initial'" class="col-md-12">
+                    <kendo-label [for]="email" text="Email"></kendo-label>
+                    <input kendoTextBox #email [formControlName]="'email'" />
+                    <kendo-formerror>Error: Email is required</kendo-formerror>
+                </kendo-formfield>
+            </div>
+            <div class="col-md-4">
+                <kendo-formfield class="arrival-date">
+                    <kendo-label [for]="dateofbirth" text="Date of Birth"></kendo-label>
+                    <kendo-datepicker #dateofbirth ngDefaultControl [formControlName]="'dateofbirth'"></kendo-datepicker>
+                    <kendo-formerror>Error: Date of Birth is required</kendo-formerror>
+                </kendo-formfield>
+            </div>
+        </div>
+    </form>
+    <div class="row float-right">
+        <div class="col-md-6 ">
+            <button kendoButton (click)="onButtonClick()" primary="true">Save</button>
+        </div>
+    </div>
+</div>

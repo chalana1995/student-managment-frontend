@@ -1,0 +1,65 @@
+<kendo-dialog title="Please confirm" *ngIf="dialogOpened" (close)="close('dialog')" [minWidth]="250" [width]="450">
+    <p style="margin: 30px; text-align: center;">Are you sure you want to Delete Item?</p>
+    <kendo-dialog-actions>
+        <button kendoButton (click)="action('no')">No</button>
+        <button kendoButton (click)="action('yes')" primary="true">Yes</button>
+    </kendo-dialog-actions>
+</kendo-dialog>
+
+
+<div class="container mt-5 mb-4">
+    <h2>Student List</h2>
+    <div class="mt-2 mb-4 ">
+        <a routerLink="student/add/0" class="btn btn-primary mt-2 mb-2 ">Add Student</a>
+    </div>
+    <div class="mt-2 mb-2 ml-3">
+        <div class="row mt-2">
+            <h6 class="ml-2"><i class='fas fa-file-excel'></i>File Upload</h6>
+        </div>
+        <div class="row mt-2">
+            <form class="k-form" [formGroup]="form" novalidate (ngSubmit)="save(form.value, form.valid)">
+                <kendo-upload #avatar ngDefaultControl [restrictions]="myRestrictions" [multiple]="false" [formControlName]="'avatar'"
+                    [saveUrl]="uploadSaveUrl" [removeUrl]="uploadRemoveUrl">
+                </kendo-upload>
+                <p class="uploaderror" *ngIf="form.controls.avatar.errors?.required && submitted">Error: Uploading the
+                    file is
+                    required</p>
+                <div class="p-2 d-flex justify-content-start bd-highlight">
+                    <button type="submit" class="k-button k-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <hr />
+    <div>
+        <kendo-grid [data]="view1" [pageSize]="state.take" [skip]="state.skip" [height]="320" [sort]="state.sort"
+            [sortable]="true" [pageable]="true" (dataStateChange)="dataStateChange($event)">
+            <kendo-grid-column field="id" title="ID" width="50">
+            </kendo-grid-column>
+            <kendo-grid-column field="name" title="Name" width="250">
+            </kendo-grid-column>
+            <kendo-grid-column field="dateofbirth" title="Date Of Birth" width="130">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    {{ dataItem.dateofbirth | date:'yyyy.MM.dd' }}
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="email" title="Email" width="250">
+            </kendo-grid-column>
+            <kendo-grid-column field="age" title="Age" width="80">
+            </kendo-grid-column>
+            <kendo-grid-column title="Action" width="150">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <div class="col-xs-12 col-sm-12 col-md-12 example-col">
+                        <button kendoButton [routerLink]="['student/edit',dataItem.id]"><i
+                                class='fas fa-user-edit'></i></button>
+                        <div class="example-wrapper" style="margin-left: 60px;margin-top: -25px;">
+                            <button kendoButton *ngIf="!dialogOpened && !windowOpened" (click)="open(dataItem.id)"><i
+                                    class='fas fa-trash'></i></button>
+                        </div>
+                    </div>
+                </ng-template>
+            </kendo-grid-column>
+        </kendo-grid>
+    </div>
+</div>
